@@ -358,8 +358,8 @@
 ! hydrostatic pressure (P_HYD), motivated particularly by 0h HRRR
 !      VarName='PB'
       VarName='P_HYD'
-      call getVariable(fileName,DateStr,DataHandle,VarName,DUM3D,         &
-        IM+1,1,JM+1,LM+1,IM, JS,JE,LM)
+      call getVariable(fileName,DateStr,DataHandle,VarName,DUM3D,       &
+                        IM+1,1,JM+1,LM+1,IM, JS,JE,LM)
 !      VarName='P'
 !      call getVariable(fileName,DateStr,DataHandle,VarName,DUM3D2,        &
 !        IM+1,1,JM+1,LM+1,IM, JS,JE,LM)
@@ -425,15 +425,12 @@
         do i = 1, im
           if((PMID(I,J,ll-1) - PMID(I,J,ll)).ge.0. .and. PMID(I,J,ll-1) .ne. 0.0) then
             write(*,*) 'non-monotonic PMID, i,j,ll ', i,j,ll
-            write(*,*) 'PMID: ll-2,ll-1,ll', PMID(I,J,LL-2) &
-                  ,PMID(I,J,LL-1), PMID(I,J,LL)
+            write(*,*) 'PMID: ll-2,ll-1,ll', PMID(I,J,LL-2),PMID(I,J,LL-1), PMID(I,J,LL)
 
-            PMID(I,J,LL)=PMID(I,J,ll-1) +                   &
-                         fact*(PMID(I,J,LL-1)-PMID(I,J,LL-2))
+            PMID(I,J,LL)=PMID(I,J,ll-1) + fact*(PMID(I,J,LL-1)-PMID(I,J,LL-2))
 
             write(*,*) 'after adjustment-i,j,ll ', i,j,ll
-            write(*,*) 'PMID: ll-2,ll-1,ll', PMID(I,J,LL-2) &
-                  ,PMID(I,J,LL-1), PMID(I,J,LL)
+            write(*,*) 'PMID: ll-2,ll-1,ll', PMID(I,J,LL-2),PMID(I,J,LL-1), PMID(I,J,LL)
           endif
         end do
       end do
@@ -445,6 +442,8 @@
             DO J=JSTA_2L,JEND_2U
               PINT(I,J,L)=(PMID(I,J,L-1)+PMID(I,J,L))*0.5
               ALPINT(I,J,L)=ALOG(PINT(I,J,L))
+              if (ALPINT(I,J,L) < 0.0 .OR. ALPINT(I,J,L) > 15.0 )       &
+                write(0,'(1x,a,4I5,2F12.3)') me,i,j,l,pint(i,j,l),alpint(i,j,l)
             ENDDO
          ENDDO
       ENDDO
@@ -638,7 +637,7 @@
        do j = jsta_2l, jend_2u
         do i = 1, im
             qqnw ( i, j, l ) = dum3d ( i, j, l )
-        if(i.eq.im/2.and.j.eq.(jsta+jend)/2)print*,'sample QQNW= ',    &
+        if(i.eq.im/2.and.j.eq.(jsta+jend)/2)print*,'sample QQNW= ',     &
           i,j,l,QQNW ( i, j, l )
         end do
        end do
@@ -650,7 +649,7 @@
        do j = jsta_2l, jend_2u
         do i = 1, im
             qqnwfa ( i, j, l ) = dum3d ( i, j, l )
-        if(i.eq.im/2.and.j.eq.(jsta+jend)/2)print*,'sample QQNWFA= ', &
+        if(i.eq.im/2.and.j.eq.(jsta+jend)/2)print*,'sample QQNWFA= ',   &
           i,j,l,QQNWFA ( i, j, l )
         end do
        end do
@@ -662,7 +661,7 @@
        do j = jsta_2l, jend_2u
         do i = 1, im
             qqnifa ( i, j, l ) = dum3d ( i, j, l )
-        if(i.eq.im/2.and.j.eq.(jsta+jend)/2)print*,'sample QQNIFA= ', &
+        if(i.eq.im/2.and.j.eq.(jsta+jend)/2)print*,'sample QQNIFA= ',   &
           i,j,l,QQNIFA ( i, j, l )
         end do
        end do
@@ -671,7 +670,7 @@
 
 ! Read in extinction coefficient for aerosol at 550 nm
 !      VarName='EXTCOF55'
-!      call getVariable(fileName,DateStr,DataHandle,VarName,DUM3D,        &
+!      call getVariable(fileName,DateStr,DataHandle,VarName,DUM3D,      &
 !        IM+1,1,JM+1,LM+1,IM,JS,JE,LM)
 !      do l = 1, lm
 !       do j = jsta_2l, jend_2u
@@ -708,7 +707,7 @@
       else
 
        VarName='CWM'
-       call getVariable(fileName,DateStr,DataHandle,VarName,DUM3D,        &
+       call getVariable(fileName,DateStr,DataHandle,VarName,DUM3D,      &
         IM+1,1,JM+1,LM+1,IM, JS,JE,LM)
        do l = 1, lm
         do j = jsta_2l, jend_2u
@@ -719,7 +718,7 @@
        end do
 
        VarName='F_ICE_PHY'
-       call getVariable(fileName,DateStr,DataHandle,VarName,DUM3D,        &
+       call getVariable(fileName,DateStr,DataHandle,VarName,DUM3D,      &
         IM+1,1,JM+1,LM+1,IM, JS,JE,LM)
        do l = 1, lm
         do j = jsta_2l, jend_2u
@@ -730,7 +729,7 @@
        end do
 
        VarName='F_RAIN_PHY'
-       call getVariable(fileName,DateStr,DataHandle,VarName,DUM3D,        &
+       call getVariable(fileName,DateStr,DataHandle,VarName,DUM3D,      &
         IM+1,1,JM+1,LM+1,IM, JS,JE,LM)
        do l = 1, lm
         do j = jsta_2l, jend_2u
@@ -741,7 +740,7 @@
        end do
 
        VarName='F_RIMEF_PHY'
-       call getVariable(fileName,DateStr,DataHandle,VarName,DUM3D,       &
+       call getVariable(fileName,DateStr,DataHandle,VarName,DUM3D,      &
         IM+1,1,JM+1,LM+1,IM, JS,JE,LM)
        do l = 1, lm
         do j = jsta_2l, jend_2u
@@ -754,8 +753,8 @@
       end if
 
        VarName='HTOP'
-      IF(ICU_PHYSICS .EQ. 3 .or. ICU_PHYSICS .EQ. 5) VarName='CUTOP'
-       call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY,       &
+       IF(ICU_PHYSICS .EQ. 3 .or. ICU_PHYSICS .EQ. 5) VarName='CUTOP'
+       call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY,      &
         IM,1,JM,1,IM,JS,JE,1)
        do j = jsta_2l, jend_2u
         do i = 1, im
@@ -763,8 +762,8 @@
         end do
        end do
        VarName='HBOT'
-      IF(ICU_PHYSICS .EQ. 3 .or. ICU_PHYSICS .EQ. 5) VarName='CUBOT'
-       call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY,       &
+       IF(ICU_PHYSICS .EQ. 3 .or. ICU_PHYSICS .EQ. 5) VarName='CUBOT'
+       call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY,      &
         IM,1,JM,1,IM,JS,JE,1)
        do j = jsta_2l, jend_2u
         do i = 1, im
@@ -773,8 +772,8 @@
        end do
 
        VarName='CUPPT'
-       call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY,       &
-        IM,1,JM,1,IM,JS,JE,1)
+       call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY,      &
+                        IM,1,JM,1,IM,JS,JE,1)
        do j = jsta_2l, jend_2u
         do i = 1, im
             CUPPT ( i, j ) = dummy ( i, j )
@@ -783,10 +782,10 @@
 
 
       IF(MODELNAME == 'RAPR')THEN
-      call getVariable(fileName,DateStr,DataHandle,'TKE_PBL',DUM3D,      &
+      call getVariable(fileName,DateStr,DataHandle,'TKE_PBL',DUM3D,     &
         IM+1,1,JM+1,LM+1,IM,JS,JE,LM)
       ELSE
-      call getVariable(fileName,DateStr,DataHandle,'TKE',DUM3D,          &
+      call getVariable(fileName,DateStr,DataHandle,'TKE',DUM3D,         &
         IM+1,1,JM+1,LM+1,IM,JS,JE,LM)
       ENDIF
       do l = 1, lm
@@ -802,38 +801,37 @@
 
 !  get sfc pressure
       VarName='MU'
-      call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY,        &
-        IM,1,JM,1,IM,JS,JE,1)
+      call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY,
+            IM,1,JM,1,IM,JS,JE,1)
       VarName='MUB'
-      call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY2,       &
-        IM,1,JM,1,IM,JS,JE,1)
+      call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY2,
+            IM,1,JM,1,IM,JS,JE,1)
       VarName='P_TOP'
-      call getVariable(fileName,DateStr,DataHandle,VarName,PT,           &
+      call getVariable(fileName,DateStr,DataHandle,VarName,PT,          &
         1,1,1,1,1,1,1,1)
 
-         DO I=1,IM
-            DO J=JS,JE
-                 PINT (I,J,LM+1) = DUMMY(I,J)+DUMMY2(I,J)+PT
-                 PINT (I,J,1) = PT
-                 ALPINT(I,J,LM+1)=ALOG(PINT(I,J,LM+1))
-                 ALPINT(I,J,1)=ALOG(PINT(I,J,1))
-            ENDDO
-         ENDDO
+      DO I=1,IM
+        DO J=JS,JE
+            PINT (I,J,LM+1) = DUMMY(I,J)+DUMMY2(I,J)+PT
+            PINT (I,J,1) = PT
+            ALPINT(I,J,LM+1)=ALOG(PINT(I,J,LM+1))
+            ALPINT(I,J,1)=ALOG(PINT(I,J,1))
+        ENDDO
+      ENDDO
 
 
       VarName='HGT'
-      call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY,        &
-        IM,1,JM,1,IM,JS,JE,1)
-       do j = jsta_2l, jend_2u
-        do i = 1, im
-            FIS ( i, j ) = dummy ( i, j ) * G
-        end do
+      call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY,       &
+                        IM,1,JM,1,IM,JS,JE,1)
+      do j = jsta_2l, jend_2u
+       do i = 1, im
+           FIS ( i, j ) = dummy ( i, j ) * G
        end do
-       write(0,*) 'FIS=',FIS(1,530), maxval(fis),minval(fis)
+      end do
 !
       VarName='PHB'
       call getVariable(fileName,DateStr,DataHandle,VarName,DUM3D,       &
-        IM+1,1,JM+1,LM+1,IM,JS,JE,LM+1)
+                        IM+1,1,JM+1,LM+1,IM,JS,JE,LM+1)
       DO L=1,LM+1
         DO I=1,IM
          DO J=JS,JE
@@ -843,7 +841,7 @@
       ENDDO
       VarName='PH'
       call getVariable(fileName,DateStr,DataHandle,VarName,DUM3D,       &
-        IM+1,1,JM+1,LM+1,IM,JS,JE,LM+1)
+                        IM+1,1,JM+1,LM+1,IM,JS,JE,LM+1)
 
       print*,'finish reading geopotential'
 ! ph/phb are geopotential z=(ph+phb)/9.801
@@ -857,22 +855,22 @@
 
       IF(MODELNAME == 'RAPR')THEN
 
-      VarName='PSFC'
-      call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY,       &
-        IM,1,JM,1,IM,JS,JE,1)
+        VarName='PSFC'
+        call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY,     &
+          IM,1,JM,1,IM,JS,JE,1)
 
-      DO J=Jsta,jend
-      DO I=1,IM
-        if((PINT(I,J,lm) - DUMMY(I,J)).ge.0. .and. PINT(I,J,lm) .ne. 0.0) then
-           write(*,*) 'non-monotonic PINT, i,j,lm ', i,j,lm
-           write(*,*)  'PINT: lm,lm+1, PMID: lm', PINT(I,J,LM),DUMMY(I,J), PMID(I,J,LM)
-           DUMMY(I,J)=PMID(I,J,LM)*1.001
-           write(*,*) 'after adjustment-i,j,lm+1 ', i,j,lm+1,DUMMY(I,J)
-        endif
-        PINT(I,J,LM+1)=DUMMY(I,J)
-        ALPINT(I,J,LM+1)=ALOG(PINT(I,J,LM+1))
-      ENDDO
-      ENDDO
+        DO J=Jsta,jend
+        DO I=1,IM
+          if((PINT(I,J,lm) - DUMMY(I,J)).ge.0. .and. PINT(I,J,lm) .ne. 0.0) then
+             write(*,*) 'non-monotonic PINT, i,j,lm ', i,j,lm
+             write(*,*)  'PINT: lm,lm+1, PMID: lm', PINT(I,J,LM),DUMMY(I,J), PMID(I,J,LM)
+             DUMMY(I,J)=PMID(I,J,LM)*1.001
+             write(*,*) 'after adjustment-i,j,lm+1 ', i,j,lm+1,DUMMY(I,J)
+          endif
+          PINT(I,J,LM+1)=DUMMY(I,J)
+          ALPINT(I,J,LM+1)=ALOG(PINT(I,J,LM+1))
+        ENDDO
+        ENDDO
 
       ELSE
 !!!!!!!!!!!!!
@@ -885,20 +883,18 @@
 
 
         pvapor(I,J)=0.
-       do L=1,LM
-       dz=ZINT(I,J,L)-ZINT(I,J,L+1)
-       rho=PMID(I,J,L)/(RD*T(I,J,L))
+        do L=1,LM
+            dz=ZINT(I,J,L)-ZINT(I,J,L+1)
+            rho=PMID(I,J,L)/(RD*T(I,J,L))
 
 
-        if (L .le. LM-1) then
-        QMEAN=0.5*(Q(I,J,L)+Q(I,J,L+1))
-        else
-        QMEAN=Q(I,J,L)
-        endif
-
-
-       pvapor(I,J)=pvapor(I,J)+G*rho*dz*QMEAN
-       enddo
+            if (L .le. LM-1) then
+                QMEAN=0.5*(Q(I,J,L)+Q(I,J,L+1))
+            else
+                QMEAN=Q(I,J,L)
+            endif
+            pvapor(I,J)=pvapor(I,J)+G*rho*dz*QMEAN
+        enddo
 
 ! test elim
 !       pvapor(I,J)=0.
@@ -958,7 +954,7 @@
 
       DO J=Jsta,jend
       DO I=1,IM
-              PINT(I,J,LM+1)=PINT(I,J,LM+1)+PVAPOR(I,J)
+         PINT(I,J,LM+1)=PINT(I,J,LM+1)+PVAPOR(I,J)
 ! KRF - check surface pressure for monotonic correctness
 
          if((PINT(I,J,lm) - PINT(I,J,LM+1)).ge.0. .and. PINT(I,J,lm) .ne. 0.0) then
@@ -978,76 +974,75 @@
 
 !!!!!!!!!!!!!
       IF(MODELNAME == 'RAPR')THEN
-!integrate heights hydrostatically
-       do j = js, je
-        do i = 1, im
-            ZINT(I,J,LM+1)=FIS(I,J)/G
-            DUMMY(I,J)=FIS(I,J)
-         if(i.eq.im/2.and.j.eq.(jsta+jend)/2)                           &
-        print*,'i,j,L,ZINT from unipost= ',i,j,LM+1,ZINT(I,J,LM+1)      &
-              , ALPINT(I,J,LM+1),ALPINT(I,J,LM)  
+        !integrate heights hydrostatically
+        do j = js, je
+          do i = 1, im
+              ZINT(I,J,LM+1)=FIS(I,J)/G
+              DUMMY(I,J)=FIS(I,J)
+              !if(i.eq.im/2.and.j.eq.(jsta+jend)/2)                                &
+              !    print*,'i,j,L,ZINT from unipost= ',i,j,LM+1,ZINT(I,J,LM+1)      &
+              !        , ALPINT(I,J,LM+1),ALPINT(I,J,LM)
+          end do
         end do
-       end do
-      DO L=LM,1,-1
-       do j = js, je
-        do i = 1, im
-         DUMMY2(I,J)=HTM(I,J,L)*T(I,J,L)*(Q(I,J,L)*D608+1.0)*RD*          &
-                   (ALPINT(I,J,L+1)-ALPINT(I,J,L))+DUMMY(I,J)
-! compute difference between model and unipost heights:
-         DUM3D(I,J,L)=ZINT(I,J,L)-DUMMY2(I,J)/g
-! now replace model heights with unipost heights
-         ZINT(I,J,L)=DUMMY2(I,J)/G
-         if(i.eq.im/2.and.j.eq.(jsta+jend)/2)       &
-        print*,'i,j,L,ZINT from unipost= ',i,j,l,ZINT(I,J,L)
-         DUMMY(I,J)=DUMMY2(I,J)
-        ENDDO
-       ENDDO
-      END DO
-      DO L=LM,1,-1
-       do j = js, je
-        do i = 1, im
-         if(i.eq.im/2.and.j.eq.(jsta+jend)/2) then
-        print*,'DIFF heights model-unipost= ',         &
-         i,j,l,DUM3D(I,J,L)
-         endif
-        ENDDO
-       ENDDO
-      END DO
+        DO L=LM,1,-1
+         do j = js, je
+          do i = 1, im
+            DUMMY2(I,J)=HTM(I,J,L)*T(I,J,L)*(Q(I,J,L)*D608+1.0)*RD*     &
+                     (ALPINT(I,J,L+1)-ALPINT(I,J,L))+DUMMY(I,J)
+            ! compute difference between model and unipost heights:
+            DUM3D(I,J,L)=ZINT(I,J,L)-DUMMY2(I,J)/g
+            ! now replace model heights with unipost heights
+            ZINT(I,J,L)=DUMMY2(I,J)/G
+            !if(i.eq.im/2.and.j.eq.(jsta+jend)/2)                        &
+            !    print*,'i,j,L,ZINT from unipost= ',i,j,l,ZINT(I,J,L)
+            DUMMY(I,J)=DUMMY2(I,J)
+          ENDDO
+         ENDDO
+        END DO
+        !DO L=LM,1,-1
+        ! do j = js, je
+        !  do i = 1, im
+        !   if(i.eq.im/2.and.j.eq.(jsta+jend)/2) then
+        !        print*,'DIFF heights model-unipost= ',i,j,l,DUM3D(I,J,L)
+        !   endif
+        !  ENDDO
+        ! ENDDO
+        !END DO
 
-      print*,'finish deriving geopotential in ARW'
+        print*,'finish deriving geopotential in ARW'
 
       ENDIF  ! IF(MODELNAME == 'RAPR')THEN
 
-
       IF(MODELNAME == 'RAPR')THEN
 
-       DO L=1,LM-1
-        DO I=1,IM
-          DO J=JS,JE
-          FACT=(ALOG(PMID(I,J,L))-ALPINT(I,J,L))/                   & 
-               max(1.e-6,(ALPINT(I,J,L+1)-ALPINT(I,J,L)))  
-          ZMID(I,J,L)=ZINT(I,J,L)+(ZINT(I,J,L+1)-ZINT(I,J,L))*FACT
-          dummy(i,j)=ZMID(I,J,L)
-         if((ALPINT(I,J,L+1)-ALPINT(I,J,L)) .lt. 1.e-6) print*,       &
-                 'P(K+1) and P(K) are too close, i,j,L,',             &
-                 'ALPINT(I,J,L+1),ALPINT(I,J,L),ZMID = ',             &
-                  i,j,l,ALPINT(I,J,L+1),ALPINT(I,J,L),ZMID(I,J,L)
+        DO L=1,LM-1
+            DO I=1,IM
+              DO J=JS,JE
+                FACT=(ALOG(PMID(I,J,L))-ALPINT(I,J,L))/                 &
+                     max(1.e-6,(ALPINT(I,J,L+1)-ALPINT(I,J,L)))
+                ZMID(I,J,L)=ZINT(I,J,L)+(ZINT(I,J,L+1)-ZINT(I,J,L))*FACT
+                dummy(i,j)=ZMID(I,J,L)
+                if((ALPINT(I,J,L+1)-ALPINT(I,J,L)) .lt. 1.e-6) then
+                    print *,'P(K+1) and P(K) are too close.'
+                    print *,'i,j,L,ZMID = ',i,j,l,ZMID(I,J,L)
+                    print *,'ALPINT(I,J,L+1),ALPINT(I,J,L) = ',ALPINT(I,J,L+1),ALPINT(I,J,L)
+                endif
+              ENDDO
             ENDDO
-          ENDDO
-       print*,'max/min ZMID= ',l,maxval(dummy),minval(dummy)
+            print*,'max/min ZMID= ',l,maxval(dummy),minval(dummy)
         ENDDO
 
         DO I=1,IM
-         DO J=JS,JE
-          DO L=1,LM
-           ZINT(I,J,L+1) =AMIN1(ZINT(I,J,L)-2.,ZINT(I,J,L+1))
-           ZMID(I,J,L)=(ZINT(I,J,L+1)+ZINT(I,J,L))*0.5  ! ave of z
-                ENDDO
-          dummy(i,j)=ZMID(I,J,LM)
-            ENDDO
+          DO J=JS,JE
+           DO L=1,LM
+                ZINT(I,J,L+1) =AMIN1(ZINT(I,J,L)-2.,ZINT(I,J,L+1))
+                ZMID(I,J,L)=(ZINT(I,J,L+1)+ZINT(I,J,L))*0.5  ! ave of z
+           ENDDO
+           dummy(i,j)=ZMID(I,J,LM)
+           ENDDO
         ENDDO
-       print*,'max/min ZMID= ',lm,maxval(ZMID(1:im,js:je,lm)),       &
-                                  minval(ZMID(1:im,js:je,lm))
+        print*,'max/min ZMID= ',lm,maxval(ZMID(1:im,js:je,lm)),         &
+                                   minval(ZMID(1:im,js:je,lm))
       ELSE
 
        DO L=1,LM
