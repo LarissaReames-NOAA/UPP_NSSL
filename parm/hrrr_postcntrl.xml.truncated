@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<postxml>
+<!--  Lin Gan:  20150416 validated -->
+    <paramset>
+    <datset>WRFPRS</datset>
+    <grid_num>4</grid_num>
+    <sub_center>ncep_nco</sub_center>
+    <version_no>v2003</version_no>
+    <local_table_vers_no>local_tab_yes1</local_table_vers_no>
+    <sigreftime>fcst</sigreftime>
+    <prod_status>oper</prod_status>
+    <data_type>fcst</data_type>
+    <gen_proc_type>fcst</gen_proc_type>
+    <time_range_unit>hour</time_range_unit>
+    <orig_center>nws_ncep</orig_center>
+    <gen_proc>wrf_em_ncar_arwrf</gen_proc>
+    <packing_method>complex_packing_spatial_diff</packing_method>
+    <order_of_sptdiff>2nd_ord_sptdiff</order_of_sptdiff>
+    <field_datatype>fltng_pnt</field_datatype>
+    <comprs_type>lossless</comprs_type>
+
+       <param>
+       <shortname>ACM_WEASD_ON_SURFACE</shortname>
+       <scale>5.0</scale>
+       </param>
+
+       <param>
+       <shortname>REFD_ON_SPEC_HGT_LVL_ABOVE_GRND</shortname>
+       <pname>REFD</pname>
+       <table_info>NCEP</table_info>
+       <level>4000. 1000.</level>
+       <scale>4.0</scale>
+       </param>
+
+    <param>
+    <shortname>MAXVIG_ON_ENTIRE_ATMOS_SINGLE_LYR</shortname>
+    <pname>TCOLG</pname>
+    <scale>3.0</scale>
+    </param>
+
+<!--    <param> -->
+<!--    <shortname>HAILCASTMAX_ON_ENTIRE_ATMOS_SINGLE_LYR</shortname> -->
+<!--    <pname>HAILCASTMAX</pname> -->
+<!--    <scale>3.0</scale> -->
+<!--    </param> -->
+
+    <param>
+    <shortname>AFWA_HAILCAST_MAX</shortname>
+    <scale>4.0</scale>
+    <table_info>NCEP</table_info>
+    </param>
+
+   </paramset>
+   </postxml>

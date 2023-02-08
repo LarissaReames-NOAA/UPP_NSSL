@@ -1,0 +1,32 @@
+# Ignore .mod, .o, .a, .exe 
+*.mod
+*.o
+*.a
+*.exe
+._*
+
+# Ignore log files
+*.log
+
+# Ignore some cpp files
+
+src/lib/crtm2/makefile
+src/lib/g2/addfield.f
+src/lib/g2/gf_unpack7.f
+src/lib/sp/fftpack.f
+src/lib/sp/lapack_gen.f
+src/lib/sp/ncpus.f
+src/lib/sp/splat.f
+src/unipost/GFSPOST.f
+src/unipost/GRIBIT.f
+src/unipost/INITPOST.f
+src/unipost/INITPOST_BIN_MPIIO.f
+src/unipost/MDLFLD.f
+src/unipost/MICROINIT.f
+src/unipost/kinds_mod.f
+src/unipost/params.f
+
+# Ignore include files
+include/*
+
+fix/*
