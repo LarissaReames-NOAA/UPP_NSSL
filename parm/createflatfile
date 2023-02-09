@@ -1,0 +1,11 @@
+#!/bin/bash
+
+UPPSRC=/lfs4/NAGAPE/hpc-wof1/ywang/MPAS/UPP_KATE_kjet/parm
+
+PERLXML=${UPPSRC}/PostXMLPreprocessor.pl
+FV3SARCTRLFILENAME=hrrr_postcntrl.xml
+FV3SARAVAILXMLFILENAME=hrrr_post_avblflds.xml
+FV3SARFLATFILENAME=hrrr_postxconfig-NT.txt
+
+cd $UPPSRC
+/bin/perl ${PERLXML} ${FV3SARCTRLFILENAME} ${FV3SARAVAILXMLFILENAME} ${FV3SARFLATFILENAME}
