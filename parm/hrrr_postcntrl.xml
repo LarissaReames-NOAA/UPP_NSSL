@@ -22,14 +22,14 @@
        <param>
        <shortname>HGT_ON_ISOBARIC_SFC</shortname>
        <pname>HGT</pname>
-       <level>25000. 50000. 70000. 85000. 92500. 100000.</level> 
+       <level>25000. 50000. 70000. 75000. 80000. 85000. 90000. 92500. 95000. 100000.</level>
        <scale>6.0</scale>
        </param>
 
        <param>
        <shortname>TMP_ON_ISOBARIC_SFC</shortname>
        <pname>TMP</pname>
-       <level>25000. 50000. 70000. 85000. 92500. 100000.</level>  
+       <level>25000. 50000. 70000. 75000. 80000. 85000. 90000. 92500. 95000. 100000.</level>
        <scale>3.0</scale>
        </param>
 
@@ -43,28 +43,28 @@
        <param>
        <shortname>SPFH_ON_ISOBARIC_SFC</shortname>
        <pname>SPFH</pname>
-       <level>25000. 50000. 70000. 85000. 92500. 100000.</level>  
+       <level>25000. 50000. 70000. 75000. 80000. 85000. 90000. 92500. 95000. 100000.</level>
        <scale>4.0</scale>
        </param>
 
        <param>
        <shortname>DZDT_ON_ISOBARIC_SFC</shortname>
        <pname>DZDT</pname>
-       <level>25000. 50000. 70000. 85000. 92500. 100000.</level>  
+       <level>25000. 50000. 70000. 75000. 80000. 85000. 90000. 92500. 95000. 100000.</level>
        <scale>-5.0</scale>
        </param>
 
        <param>
        <shortname>UGRD_ON_ISOBARIC_SFC</shortname>
        <pname>UGRD</pname>
-       <level>25000. 50000. 70000. 85000. 92500. 100000.</level>  
+       <level>25000. 50000. 70000. 75000. 80000. 85000. 90000. 92500. 95000. 100000.</level>
        <scale>4.0</scale>
        </param>
 
        <param>
        <shortname>VGRD_ON_ISOBARIC_SFC</shortname>
        <pname>VGRD</pname>
-       <level>25000. 50000. 70000. 85000. 92500. 100000.</level>  
+       <level>25000. 50000. 70000. 75000. 80000. 85000. 90000. 92500. 95000. 100000.</level>
        <scale>4.0</scale>
        </param>
 
@@ -276,7 +276,7 @@
        <pname>APCP</pname>
        <scale>4.0</scale>
        </param>
- 
+
        <param>
        <shortname>ACM_WEASD_ON_SURFACE</shortname>
        <scale>5.0</scale>
@@ -421,6 +421,7 @@
        <scale>-4.0</scale>
        </param>
 
+<!--
        <param>
        <shortname>REFD_ON_SPEC_HGT_LVL_ABOVE_GRND</shortname>
        <pname>REFD</pname>
@@ -428,18 +429,21 @@
        <level>4000. 1000.</level>
        <scale>4.0</scale>
        </param>
+-->
 
-<!--       <param> -->
-<!--       <shortname>GSD_REFL_ON_SPEC_HGT_LVL_ABOVE_GRND_1km</shortname> -->
-<!--       <table_info>NCEP</table_info> -->
-<!--       <scale>-4.0</scale> -->
-<!--       </param> -->
-  
-<!--       <param> -->
-<!--       <shortname>GSD_REFL_ON_SPEC_HGT_LVL_ABOVE_GRND_4km</shortname> -->
-<!--       <table_info>NCEP</table_info> -->
-<!--       <scale>-4.0</scale> -->
-<!--       </param> -->
+       <param>
+       <shortname>GSD_REFL_ON_SPEC_HGT_LVL_ABOVE_GRND_1km</shortname>
+       <table_info>NCEP</table_info>
+       <scale>-4.0</scale>
+       </param>
+
+<!--
+       <param>
+       <shortname>GSD_REFL_ON_SPEC_HGT_LVL_ABOVE_GRND_4km</shortname>
+       <table_info>NCEP</table_info>
+       <scale>-4.0</scale>
+       </param>
+-->
 
        <param>
        <shortname>MAX_REF_ON_ISOTHERMAL_-10C</shortname>
@@ -671,7 +675,7 @@
     <shortname>MIN_UPHL_ON_SPEC_HGT_LVL_ABOVE_GRND_0-3km</shortname>
     <table_info>NCEP</table_info>
     <scale>4.0</scale>
-    </param>    
+    </param>
 
     <param>
     <shortname>MIN_UPHL_ON_SPEC_HGT_LVL_ABOVE_GRND_0-0.5km</shortname>
@@ -789,35 +793,35 @@
     <param>
     <shortname>CLWMR_ON_HYBRID_LVL</shortname>
     <pname>CLWMR</pname>
-    <level>0.</level> 
+    <level>0.</level>
     <scale>3.0</scale>
     </param>
 
     <param>
     <shortname>CICE_ON_HYBRID_LVL</shortname>
     <pname>CICE</pname>
-    <level>0.</level> 
+    <level>0.</level>
     <scale>3.0</scale>
     </param>
 
     <param>
     <shortname>RWMR_ON_HYBRID_LVL</shortname>
     <pname>RWMR</pname>
-    <level>0.</level> 
+    <level>0.</level>
     <scale>3.0</scale>
     </param>
 
     <param>
     <shortname>SNMR_ON_HYBRID_LVL</shortname>
     <pname>SNMR</pname>
-    <level>0.</level> 
+    <level>0.</level>
     <scale>3.0</scale>
     </param>
 
     <param>
     <shortname>GRMR_ON_HYBRID_LVL</shortname>
     <pname>GRLE</pname>
-    <level>0.</level> 
+    <level>0.</level>
     <scale>3.0</scale>
     </param>
 
