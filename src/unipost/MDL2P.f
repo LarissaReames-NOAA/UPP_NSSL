@@ -1101,6 +1101,8 @@
                 IF(IGET(023) > 0 .AND. NINT(SPL(LP)) == 100000) THEN
                   GO TO 222
                 ELSE
+
+                  CALL REPLACE_BAD(FSL,IM,jend_2u-jsta_2l+1,JSTA,JEND)
 !$omp  parallel do private(i,j)
                   DO J=JSTA,JEND
                     DO I=1,IM
@@ -1111,7 +1113,6 @@
                       ENDIF
                     ENDDO
                   ENDDO
-
                   IF (SMFLAG) THEN
 !tgs - smoothing of geopotential heights
                     if(MAPTYPE == 6) then
@@ -1157,6 +1158,7 @@
 !
             IF(IGET(013) > 0) THEN
               IF(LVLS(LP,IGET(013)) > 0)THEN
+                call REPLACE_BAD(TSL,IM,JM,JSTA,JEND)
 !$omp  parallel do private(i,j)
                 DO J=JSTA,JEND
                   DO I=1,IM
@@ -1194,6 +1196,7 @@
 !
         IF(IGET(910).GT.0) THEN
           IF(LVLS(LP,IGET(910)).GT.0)THEN
+            CALL REPLACE_BAD(QSL,IM,JM,JSTA,JEND)
 !$omp parallel do private(i,j)
             DO J=JSTA,JEND
               DO I=1,IM
@@ -1232,7 +1235,6 @@
 !
         IF(IGET(014) > 0)THEN
           IF(LVLS(LP,IGET(014)) > 0)THEN
-
             tem = (P1000/spl(lp)) ** capa
 !$omp parallel do private(i,j)
             DO J=JSTA,JEND
@@ -1353,6 +1355,7 @@
 !
         IF(IGET(331) > 0)THEN
           IF(LVLS(LP,IGET(331)) > 0)THEN
+            CALL REPLACE_BAD(CFRSL,IM,JM,JSTA,JEND)
 !$omp  parallel do private(i,j)
             DO J=JSTA,JEND
               DO I=1,IM
@@ -1423,6 +1426,7 @@
 !
         IF(IGET(016) > 0)THEN
           IF(LVLS(LP,IGET(016)) > 0)THEN
+             CALL REPLACE_BAD(QSL,IM,JM,JSTA,JEND)
 !$omp  parallel do private(i,j)
              DO J=JSTA,JEND
                DO I=1,IM
@@ -1452,6 +1456,7 @@
 !
         IF(IGET(020) > 0)THEN
           IF(LVLS(LP,IGET(020)) > 0)THEN
+            CALL REPLACE_BAD(OSL,IM,JM,JSTA,JEND)
 !$omp  parallel do private(i,j)
             DO J=JSTA,JEND
               DO I=1,IM
@@ -1499,6 +1504,7 @@
 !
         IF(IGET(284) > 0)THEN
           IF(LVLS(LP,IGET(284)) > 0)THEN
+             CALL REPLACE_BAD(WSL,IM,JM,JSTA,JEND)
 !$omp  parallel do private(i,j)
              DO J=JSTA,JEND
                DO I=1,IM
@@ -1527,6 +1533,8 @@
 !
         IF(IGET(085) > 0)THEN
           IF(LVLS(LP,IGET(085)) > 0)THEN
+            CALL REPLACE_BAD(USL,IM,JM,JSTA,JEND)
+            CALL REPLACE_BAD(VSL,IM,JM,JSTA,JEND)
             CALL CALMCVG(QSL(1,jsta_2l),USL(1,jsta_2l),VSL(1,jsta_2l),EGRID1(1,jsta_2l))
 !        if(me == 0) print *,'after calmcvgme=',me,'USL=',USL(1:10,JSTA)
 !$omp  parallel do private(i,j)
@@ -1712,6 +1720,7 @@
 !
          IF (IGET(022) > 0) THEN
           IF (LVLS(LP,IGET(022)) > 0) THEN
+             CALL REPLACE_BAD(Q2SL,IM,JM,JSTA,JEND)
 !$omp  parallel do private(i,j)
              DO J=JSTA,JEND
                DO I=1,IM
@@ -1742,6 +1751,8 @@
           IF (LVLS(LP,IGET(153)) > 0) THEN
             IF(MODELNAME == 'GFS')then
 ! GFS does not seperate cloud water from ice, hoping to do that in Feb 08 implementation
+                CALL REPLACE_BAD(QW1,IM,JM,JSTA,JEND)
+                CALL REPLACE_BAD(QI1,IM,JM,JSTA,JEND)
 !$omp  parallel do private(i,j)
                DO J=JSTA,JEND
                  DO I=1,IM
@@ -1750,6 +1761,7 @@
                ENDDO
              ELSE
 !$omp  parallel do private(i,j)
+               CALL REPLACE_BAD(QW1,IM,JM,JSTA,JEND)
                DO J=JSTA,JEND
                  DO I=1,IM
                    GRID1(I,J) = QW1(I,J)
@@ -1778,6 +1790,7 @@
 !
          IF (IGET(166) > 0) THEN
           IF (LVLS(LP,IGET(166)) > 0) THEN
+             CALL REPLACE_BAD(QI1,IM,JM,JSTA,JEND)
 !$omp  parallel do private(i,j)
              DO J=JSTA,JEND
                DO I=1,IM
@@ -1805,6 +1818,7 @@
 !---  RAIN
          IF (IGET(183) > 0) THEN
           IF (LVLS(LP,IGET(183)) > 0) THEN
+            CALL REPLACE_BAD(QR1,IM,JM,JSTA,JEND)
 !$omp  parallel do private(i,j)
              DO J=JSTA,JEND
                DO I=1,IM
@@ -1832,6 +1846,7 @@
 !---  SNOW
          IF (IGET(184) > 0) THEN
            IF (LVLS(LP,IGET(184)) > 0) THEN
+             CALL REPLACE_BAD(QS1,IM,JM,JSTA,JEND)
 !$omp  parallel do private(i,j)
              DO J=JSTA,JEND
                DO I=1,IM
@@ -1859,6 +1874,7 @@
 !---  GRAUPEL
          IF (IGET(416) > 0) THEN
           IF (LVLS(LP,IGET(416)) > 0) THEN
+             CALL REPLACE_BAD(QG1,IM,JM,JSTA,JEND)
 !$omp  parallel do private(i,j)
              DO J=JSTA,JEND
                DO I=1,IM
@@ -1887,6 +1903,7 @@
 !---  TOTAL CONDENSATE
          IF (IGET(198) > 0) THEN
           IF (LVLS(LP,IGET(198)) > 0) THEN
+             CALL REPLACE_BAD(C1D,IM,JM,JSTA,JEND)
 !$omp  parallel do private(i,j)
              DO J=JSTA,JEND
                DO I=1,IM
@@ -1970,6 +1987,7 @@
 !---  Radar Reflectivity
          IF (IGET(251) > 0) THEN
           IF (LVLS(LP,IGET(251)) > 0) THEN
+            CALL REPLACE_BAD(DBZ1,IM,JM,JSTA,JEND)
 !$omp  parallel do private(i,j)
             DO J=JSTA,JEND
               DO I=1,IM
