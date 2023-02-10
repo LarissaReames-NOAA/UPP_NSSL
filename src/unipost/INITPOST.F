@@ -440,10 +440,12 @@
       DO L=2,LM
          DO I=1,IM
             DO J=JSTA_2L,JEND_2U
+                IF (PMID(I,J,L) .ne. 0.0 .AND. PMID(I,J,L-1) .ne. 0.0 ) then
               PINT(I,J,L)=(PMID(I,J,L-1)+PMID(I,J,L))*0.5
               ALPINT(I,J,L)=ALOG(PINT(I,J,L))
               if (ALPINT(I,J,L) < 0.0 .OR. ALPINT(I,J,L) > 15.0 )       &
                 write(0,'(1x,a,4I5,2F12.3)') me,i,j,l,pint(i,j,l),alpint(i,j,l)
+                ENDIF
             ENDDO
          ENDDO
       ENDDO
@@ -508,8 +510,8 @@
 
 
 
-      if(imp_physics.ne.1 .and. imp_physics.ne.3                          &
-        .and. imp_physics.ne.5 .and. imp_physics.ne.0)then
+      if(imp_physics.ne.1 .and. imp_physics.ne.3 .and.                  &
+         imp_physics.ne.5 .and. imp_physics.ne.0)then
       VarName='QICE'
       call getVariable(fileName,DateStr,DataHandle,VarName,DUM3D,         &
         IM+1,1,JM+1,LM+1,IM, JS,JE,LM)
@@ -521,7 +523,7 @@
        end do
       end do
 !      if(jj.ge. jsta .and. jj.le.jend)
-!     + print*,'sample QICE= ',qqi(ii,jj,ll)
+        ! print*,'sample QICE= ',qqi(ii,jj,ll)
       end if
 
 
@@ -801,10 +803,10 @@
 
 !  get sfc pressure
       VarName='MU'
-      call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY,
+      call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY,       &
             IM,1,JM,1,IM,JS,JE,1)
       VarName='MUB'
-      call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY2,
+      call getVariable(fileName,DateStr,DataHandle,VarName,DUMMY2,      &
             IM,1,JM,1,IM,JS,JE,1)
       VarName='P_TOP'
       call getVariable(fileName,DateStr,DataHandle,VarName,PT,          &

@@ -24,13 +24,9 @@ SFC     = ifort
 SF90    = ifort -free
 SCC     = icc
 
-#DM_FC  = mpif90 
-#DM_F90 = mpif90 -free 
-#DM_CC  = mpicc 
-
-DM_FC  = mpiifort
-DM_F90 = mpiifort -free
-DM_CC  = mpiicc -DMPI2_SUPPORT
+DM_FC  = mpiifort 
+DM_F90 = mpiifort -free 
+DM_CC  = mpiicc 
 
 FC      = $(DM_FC)
 F90     = $(DM_F90)
@@ -78,9 +74,9 @@ CP		=   /bin/cp
 MV              =   /bin/mv
 AR		=   ar ru
 
-WRF_DIR         =    /lfs3/projects/wof/wrfout_3km/WRFV3.8.1
+WRF_DIR         =    /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/WRFV4.0
 WRF_LIB2        =    
-NETCDFPATH      =    /apps/netcdf/4.2.1.1-intel
+NETCDFPATH      =    /apps/netcdf/4.7.4/intel/18.0.5
 NETCDFLIBS      =    -lnetcdff -lnetcdf
 
 COMMS_ADD_OBJ   =    
@@ -93,9 +89,9 @@ SERIAL_MPI_LIB  =
 GRIB2SUPT_LIB   =    -L/contrib/jasper/lib -L/opt/freeware/lib -ljasper -lpng -lz
 GRIB2SUPT_INC   =    -I/contrib/libpng/include -I/contrib/zlib/include -I/contrib/jasper/include
 
-BINDIR          =    /lfs3/projects/wof/wrfout_3km/UPP_KATE/bin
-INCMOD          =    /lfs3/projects/wof/wrfout_3km/UPP_KATE/include
-LIBDIR          =    /lfs3/projects/wof/wrfout_3km/UPP_KATE/lib
+BINDIR          =    /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/UPP_KATE_kjet/bin
+INCMOD          =    /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/UPP_KATE_kjet/include
+LIBDIR          =    /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/UPP_KATE_kjet/lib
 
 WRF_INCLUDE     = -I$(WRF_DIR)/frame
 
@@ -105,7 +101,9 @@ WRF_LIB         = -L$(WRF_DIR)/main  -lwrflib \
                   -L$(WRF_DIR)/external/io_grib1 -lio_grib1 \
                   -L$(WRF_DIR)/external/io_grib_share -lio_grib_share \
                   -L$(WRF_DIR)/external/esmf_time_f90 -lesmf_time \
-                  -L$(WRF_DIR)/external/fftpack/fftpack5 -lfftpack
+                  -L$(WRF_DIR)/external/fftpack/fftpack5 -lfftpack \
+                  -L$(WRF_DIR)/external/io_pnetcdf -lwrfio_pnf \
+                  -L/apps/pnetcdf/1.6.1-intel15-impi5/lib -lpnetcdf
 
 WRF_MODS        = $(WRF_DIR)/frame/module_internal_header_util.o \
                   $(WRF_DIR)/frame/pack_utils.o \

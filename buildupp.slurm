@@ -11,7 +11,7 @@
 #
 
 module purge
-module use /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/modules
+module use /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/mpas_scripts/modules
 module load build_jet_intel22
 
 export WRF_DIR=/lfs4/NAGAPE/hpc-wof1/ywang/MPAS/WRFV4.0

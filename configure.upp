@@ -24,9 +24,9 @@ SFC     = ifort
 SF90    = ifort -free
 SCC     = icc
 
-DM_FC  = mpif90 
-DM_F90 = mpif90 -free 
-DM_CC  = mpicc 
+DM_FC  = mpiifort 
+DM_F90 = mpiifort -free 
+DM_CC  = mpiicc 
 
 FC      = $(DM_FC)
 F90     = $(DM_F90)
@@ -101,7 +101,9 @@ WRF_LIB         = -L$(WRF_DIR)/main  -lwrflib \
                   -L$(WRF_DIR)/external/io_grib1 -lio_grib1 \
                   -L$(WRF_DIR)/external/io_grib_share -lio_grib_share \
                   -L$(WRF_DIR)/external/esmf_time_f90 -lesmf_time \
-                  -L$(WRF_DIR)/external/fftpack/fftpack5 -lfftpack
+                  -L$(WRF_DIR)/external/fftpack/fftpack5 -lfftpack \
+                  -L$(WRF_DIR)/external/io_pnetcdf -lwrfio_pnf \
+                  -L/apps/pnetcdf/1.6.1-intel15-impi5/lib -lpnetcdf
 
 WRF_MODS        = $(WRF_DIR)/frame/module_internal_header_util.o \
                   $(WRF_DIR)/frame/pack_utils.o \
