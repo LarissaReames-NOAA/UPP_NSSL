@@ -319,6 +319,11 @@
        <scale>1.0</scale>
        </param>
 
+        <param>
+           <shortname>BUCKET_APCP_ON_SURFACE</shortname>
+           <scale>4.0</scale>
+        </param>
+
 <!--   <param> -->
 <!--   <shortname>AVE_CRAIN_ON_SURFACE</shortname> -->
 <!--   <scale>1.0</scale> -->

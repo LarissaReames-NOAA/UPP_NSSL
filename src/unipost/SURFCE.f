@@ -3789,7 +3789,8 @@
              ENDDO
            ENDDO
            ID(1:25) = 0
-           ITPREC     = NINT(TPREC)
+           !ITPREC     = NINT(TPREC)
+           ITPREC     = NINT(prec_acc_dt)
 !mp
            if (ITPREC .ne. 0) then
              IFINCR     = MOD(IFHR,ITPREC)

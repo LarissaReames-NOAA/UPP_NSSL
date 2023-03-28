@@ -3087,8 +3087,9 @@ endif  ! 1==2
       print*,'DT= ',DT
 
 !need to get period of time for precipitation buckets
-      call ext_ncd_get_dom_ti_real(DataHandle,'PREC_ACC_DT',tmp,1,ioutcount,istatus)
-      prec_acc_dt=abs(tmp)
+      !call ext_ncd_get_dom_ti_real(DataHandle,'PREC_ACC_DT',tmp,1,ioutcount,istatus)
+      !prec_acc_dt=abs(tmp)
+      prec_acc_dt=1.0         ! hard-coded for 1 hour temporarily for MPAS CONUS run
       print*,'PREC_ACC_DT= ',prec_acc_dt
 
 !      DT = 120. !MEB need to get DT

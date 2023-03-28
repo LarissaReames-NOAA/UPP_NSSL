@@ -274,8 +274,8 @@
 !---  Radar Reflectivity
           IF((IGET(253).GT.0) )THEN
              if(MODELNAME.EQ.'RAPR') then
-                CALL REPLACE_BAD(DBZ1LOG,IM,JM,JSTA,JEND)
-                CALL REPLACE_BAD(DBZ1,IM,JM,JSTA,JEND)
+                !CALL REPLACE_BAD(DBZ1LOG,IM,JM,JSTA,JEND)
+                !CALL REPLACE_BAD(DBZ1,IM,JM,JSTA,JEND)
                 DO J=JSTA,JEND
                 DO I=1,IM
                   GRID1(I,J)=DBZ1LOG(I,J)
@@ -302,7 +302,7 @@
           END IF
 !---  Radar reflectivity from rain
           IF((IGET(279).GT.0) )THEN
-             CALL REPLACE_BAD(DBZR1,IM,JM,JSTA,JEND)
+             !CALL REPLACE_BAD(DBZR1,IM,JM,JSTA,JEND)
              DO J=JSTA,JEND
              DO I=1,IM
                GRID1(I,J)=DBZR1(I,J)
@@ -322,7 +322,7 @@
           END IF
 !---  Radar reflectivity from all ice habits (snow + graupel + sleet, etc.)
           IF((IGET(280).GT.0) )THEN
-             CALL REPLACE_BAD(DBZI1,IM,JM,JSTA,JEND)
+             !CALL REPLACE_BAD(DBZI1,IM,JM,JSTA,JEND)
              DO J=JSTA,JEND
              DO I=1,IM
                GRID1(I,J)=DBZI1(I,J)
@@ -342,7 +342,7 @@
           END IF
 !---  Radar reflectivity from parameterized convection
           IF((IGET(281).GT.0) )THEN
-             CALL REPLACE_BAD(DBZC1,IM,JM,JSTA,JEND)
+             !CALL REPLACE_BAD(DBZC1,IM,JM,JSTA,JEND)
              DO J=JSTA,JEND
              DO I=1,IM
                GRID1(I,J)=DBZC1(I,J)
@@ -373,7 +373,7 @@
        LP=1
 !---  Max Derived Radar Reflectivity
           IF((IGET(421).GT.0) )THEN
-             CALL REPLACE_BAD(REFD_MAX,IM,JM,JSTA,JEND)
+             !CALL REPLACE_BAD(REFD_MAX,IM,JM,JSTA,JEND)
              DO J=JSTA,JEND
              DO I=1,IM
                GRID1(I,J)=REFD_MAX(I,J)
@@ -408,7 +408,7 @@
 
 !---  Max Derived Radar Reflectivity at -10C
           IF((IGET(785).GT.0) )THEN
-             CALL REPLACE_BAD(REFDM10C_MAX,IM,JM,JSTA,JEND)
+             !CALL REPLACE_BAD(REFDM10C_MAX,IM,JM,JSTA,JEND)
              DO J=JSTA,JEND
              DO I=1,IM
                GRID1(I,J)=REFDM10C_MAX(I,J)
@@ -444,7 +444,7 @@
 
 !---  Max Updraft Helicity
           IF((IGET(420).GT.0) )THEN
-             CALL REPLACE_BAD(UP_HELI_MAX,IM,JM,JSTA,JEND)
+             !CALL REPLACE_BAD(UP_HELI_MAX,IM,JM,JSTA,JEND)
              DO J=JSTA,JEND
              DO I=1,IM
                GRID1(I,J)=UP_HELI_MAX(I,J)
@@ -481,7 +481,7 @@
 
 !---  Min Updraft Helicity (anticyclonic)
           IF((IGET(931).GT.0) )THEN
-             CALL REPLACE_BAD(UP_HELI_MIN,IM,JM,JSTA,JEND)
+             !CALL REPLACE_BAD(UP_HELI_MIN,IM,JM,JSTA,JEND)
              DO J=JSTA,JEND
              DO I=1,IM
                GRID1(I,J)=UP_HELI_MIN(I,J)
@@ -519,7 +519,7 @@
 
 !---  Max Updraft Helicity 1-6 km
           IF((IGET(700).GT.0) )THEN
-             CALL REPLACE_BAD(UP_HELI_MAX16,IM,JM,JSTA,JEND)
+             !CALL REPLACE_BAD(UP_HELI_MAX16,IM,JM,JSTA,JEND)
              DO J=JSTA,JEND
              DO I=1,IM
                GRID1(I,J)=UP_HELI_MAX16(I,J)
@@ -556,7 +556,7 @@
 
 !---  Min Updraft Helicity (from GSD)
           IF((IGET(786).GT.0) )THEN
-             CALL REPLACE_BAD(UP_HELI_MIN,IM,JM,JSTA,JEND)
+             !CALL REPLACE_BAD(UP_HELI_MIN,IM,JM,JSTA,JEND)
              DO J=JSTA,JEND
              DO I=1,IM
                GRID1(I,J)=UP_HELI_MIN(I,J)
@@ -593,7 +593,7 @@
 
 !---  Min Updraft Helicity 1-6 km
           IF((IGET(787).GT.0) )THEN
-             CALL REPLACE_BAD(UP_HELI_MIN16,IM,JM,JSTA,JEND)
+             !CALL REPLACE_BAD(UP_HELI_MIN16,IM,JM,JSTA,JEND)
              DO J=JSTA,JEND
              DO I=1,IM
                GRID1(I,J)=UP_HELI_MIN16(I,J)
@@ -1992,7 +1992,7 @@
           ENDIF
 !--- U Component of wind
           IF((IGET(412).GT.0) ) THEN
-            CALL REPLACE_BAD(UAGL,IM,JM,JSTA,JEND)
+            !CALL REPLACE_BAD(UAGL,IM,JM,JSTA,JEND)
             DO J=JSTA,JEND
             DO I=1,IM
               GRID1(I,J)=UAGL(I,J)
@@ -2011,7 +2011,7 @@
           ENDIF
 !--- V Component of wind
           IF((IGET(413).GT.0) ) THEN
-            CALL REPLACE_BAD(VAGL,IM,JM,JSTA,JEND)
+            !CALL REPLACE_BAD(VAGL,IM,JM,JSTA,JEND)
             DO J=JSTA,JEND
             DO I=1,IM
               GRID1(I,J)=VAGL(I,J)
