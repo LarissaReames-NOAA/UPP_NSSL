@@ -74,10 +74,10 @@ CP		=   /bin/cp
 MV              =   /bin/mv
 AR		=   ar ru
 
-WRF_DIR         =    /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/WRFV4.0
+WRF_DIR         =    /lfs4/NAGAPE/wof/mpas/MPAS_RL/src/WRFV4.0
 WRF_LIB2        =    
-NETCDFPATH      =    /apps/netcdf/4.7.4/intel/18.0.5
-NETCDFLIBS      =    -lnetcdff -lnetcdf
+NETCDFPATH      =    /apps/netcdf/4.7.0/intel_2023.2.0-impi
+NETCDFLIBS      =    -lnetcdff -lnetcdf -ltirpc
 
 COMMS_ADD_OBJ   =    
 COMMS_ADD_OBJST =    
@@ -86,12 +86,12 @@ COMMS_LIB       =
 SERIAL_MPI_STUB =    
 SERIAL_MPI_LIB  =    
 
-GRIB2SUPT_LIB   =    -L/contrib/jasper/lib -L/opt/freeware/lib -ljasper -lpng -lz
-GRIB2SUPT_INC   =    -I/contrib/libpng/include -I/contrib/zlib/include -I/contrib/jasper/include
+GRIB2SUPT_LIB   =    -L/lfs4/NAGAPE/wof/miniconda3_RL/lib -lpng -lz -ljasper
+GRIB2SUPT_INC   =    -I/lfs4/NAGAPE/wof/miniconda3_RL/include/jasper
 
-BINDIR          =    /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/UPP_KATE_kjet/bin
-INCMOD          =    /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/UPP_KATE_kjet/include
-LIBDIR          =    /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/UPP_KATE_kjet/lib
+BINDIR          =    /mnt/lfs4/NAGAPE/wof/mpas/MPAS_RL/src/UPP_KATE_kjet/bin
+INCMOD          =    /mnt/lfs4/NAGAPE/wof/mpas/MPAS_RL/src/UPP_KATE_kjet/include
+LIBDIR          =    /mnt/lfs4/NAGAPE/wof/mpas/MPAS_RL/src/UPP_KATE_kjet/lib
 
 WRF_INCLUDE     = -I$(WRF_DIR)/frame
 
@@ -103,7 +103,7 @@ WRF_LIB         = -L$(WRF_DIR)/main  -lwrflib \
                   -L$(WRF_DIR)/external/esmf_time_f90 -lesmf_time \
                   -L$(WRF_DIR)/external/fftpack/fftpack5 -lfftpack \
                   -L$(WRF_DIR)/external/io_pnetcdf -lwrfio_pnf \
-                  -L/apps/pnetcdf/1.6.1-intel15-impi5/lib -lpnetcdf
+                  -L/apps/pnetcdf/1.12.3/intel_2023.2.0-impi/lib -lpnetcdf
 
 WRF_MODS        = $(WRF_DIR)/frame/module_internal_header_util.o \
                   $(WRF_DIR)/frame/pack_utils.o \
